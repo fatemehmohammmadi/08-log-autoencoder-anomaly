@@ -25,12 +25,13 @@ def main() -> None:
     X = df[FEATS].to_numpy(dtype=float)
     y = (df["label"] == "anomaly").astype(int).to_numpy()
 
-    # Fit scaler + AE mostly on normal traffic
+    # train only on normal rows so the bottleneck learns "everyday" shape
     normal_mask = df["label"] == "normal"
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
     X_train = X_scaled[normal_mask.to_numpy()]
 
+    # tiny bottleneck (8 -> 3 -> 8); enough for this 5-feature toy set
     ae = MLPRegressor(
         hidden_layer_sizes=(8, 3, 8),
         activation="relu",
