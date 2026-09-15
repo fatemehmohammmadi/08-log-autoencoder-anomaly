@@ -1,0 +1,6 @@
+{
+  "roc_auc": 1.0,
+  "threshold_p95_normal": 0.021764,
+  "flagged_count": 145,
+  "flagged_and_true_anomaly": 100
+}
